@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const mehtodOverride = require("method-override");
 const authCtrl = require("./controllers/auth.js");
+const session = require("express-session")
 const mongoose = require("mongoose");
 const express = require("express");
 const morgan = require("morgan");
