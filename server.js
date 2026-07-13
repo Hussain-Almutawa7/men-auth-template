@@ -7,12 +7,13 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 require("dotenv").config();
 
 const mehtodOverride = require("method-override");
+const authCtrl = require("./controllers/auth.js");
 const mongoose = require("mongoose");
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
-const Example = require("./models/example.js");
+const User = require("./models/user.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,9 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(mehtodOverride("_method"));
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-    res.render("home.ejs");
-});
+app.get("/",authCtrl.home);
 
 const startServer = async () => {
     try {
