@@ -24,8 +24,8 @@ app.use(mehtodOverride("_method"));
 app.use(morgan("dev"));
 
 app.get("/",authCtrl.home);
-
 app.get("/auth/sign-up", authCtrl.showSignUpForm);
+app.post("/auth/sign-up", authCtrl.signUp);
 
 const startServer = async () => {
     try {
