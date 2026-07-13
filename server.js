@@ -25,6 +25,8 @@ app.use(morgan("dev"));
 
 app.get("/",authCtrl.home);
 
+app.get("/auth/sign-up", authCtrl.showSignUpForm);
+
 const startServer = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
