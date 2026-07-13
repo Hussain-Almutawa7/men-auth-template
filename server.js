@@ -26,6 +26,8 @@ app.use(morgan("dev"));
 app.get("/",authCtrl.home);
 app.get("/auth/sign-up", authCtrl.showSignUpForm);
 app.post("/auth/sign-up", authCtrl.signUp);
+app.get("/auth/sign-in", authCtrl.showSignInForm);
+app.post("/auth/sign-in", authCtrl.signIn)
 
 const startServer = async () => {
     try {

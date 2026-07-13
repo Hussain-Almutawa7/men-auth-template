@@ -21,6 +21,10 @@ nav {
 
 nav a {
     color: inherit;
+    transition: 0.15s;
+}
+
+nav a:hover {
     text-decoration: none;
 }
 

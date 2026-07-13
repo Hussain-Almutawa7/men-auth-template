@@ -27,8 +27,28 @@ const signUp = async (req, res) => {
     res.send(user)
 }
 
+const showSignInForm = (req, res) => {
+    res.render("auth/sign-in.ejs");
+}
+
+const signIn = async (req, res) => {
+    const userInDatabase = await User.findOne({
+        username: req.body.username
+    });
+
+    if(!userInDatabase) return res.send("User does not exist");
+
+    const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password);
+
+    if(!validPassword) return res.send("Login failed");
+
+    res.send("Sign in route")
+}
+
 module.exports = {
     home,
     showSignUpForm,
     signUp,
+    showSignInForm,
+    signIn,
 }
