@@ -36,7 +36,7 @@ form {
     gap: 10px;
 }
 
-button {
+.sign-out {
     background-color: beige;
     border: none;
     font-size: 16px;
@@ -45,6 +45,6 @@ button {
     transition: 0.15s;
 }
 
-button:hover {
+.sign-out:hover {
     text-decoration: none;
 }

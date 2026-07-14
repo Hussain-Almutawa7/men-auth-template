@@ -14,6 +14,8 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 
+const {MongoStore} = require("connect-mongo")
+
 const User = require("./models/user.js");
 
 const app = express();
@@ -27,6 +29,9 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI
+    }),
 }));
 
 app.get("/", authCtrl.home);
@@ -37,8 +42,10 @@ app.post("/auth/sign-in", authCtrl.signIn)
 app.delete("/auth/sign-out", authCtrl.signOut);
 
 app.get("/dashboard", async (req, res) => {
-    if(!req.session.user) return res.redirect("/auth/sign-in")
-    res.render("dashboard.ejs")
+    if (!req.session.user) return res.redirect("/auth/sign-in")
+    res.render("dashboard.ejs", {
+        user: req.session.user
+    })
 });
 
 const startServer = async () => {
