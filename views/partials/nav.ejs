@@ -1,14 +1,22 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example App</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example App</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/auth/sign-up">Sign Up</a>
-        <a href="/auth/sign-in">Sign In</a>
-    </nav>
+  <nav>
+    <a href="/">Home</a>
+    <% if(user) { %>
+    <form action="/auth/sign-out?_method=DELETE" method="POST">
+        <button type="submit">Sign Out</button>
+    </form>
+    <% } else { %>
+    <a href="/auth/sign-up">Sign Up</a>
+    <a href="/auth/sign-in">Sign In</a>
+    <% } %>
+  </nav>

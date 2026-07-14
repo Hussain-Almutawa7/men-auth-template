@@ -23,12 +23,23 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(mehtodOverride("_method"));
 app.use(morgan("dev"));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+}));
 
-app.get("/",authCtrl.home);
+app.get("/", authCtrl.home);
 app.get("/auth/sign-up", authCtrl.showSignUpForm);
 app.post("/auth/sign-up", authCtrl.signUp);
 app.get("/auth/sign-in", authCtrl.showSignInForm);
 app.post("/auth/sign-in", authCtrl.signIn)
+app.delete("/auth/sign-out", authCtrl.signOut);
+
+app.get("/dashboard", async (req, res) => {
+    if(!req.session.user) return res.redirect("/auth/sign-in")
+    res.render("dashboard.ejs")
+});
 
 const startServer = async () => {
     try {

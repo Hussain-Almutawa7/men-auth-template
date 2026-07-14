@@ -2,11 +2,15 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
 const home = (req, res) => {
-    res.render("home.ejs");
+    res.render("home.ejs", {
+        user: req.session.user,
+    });
 }
 
 const showSignUpForm = (req, res) => {
-    res.render("auth/sign-up.ejs");
+    res.render("auth/sign-up.ejs", {
+        user: req.session.user,
+    });
 }
 
 const signUp = async (req, res) => {
@@ -28,7 +32,9 @@ const signUp = async (req, res) => {
 }
 
 const showSignInForm = (req, res) => {
-    res.render("auth/sign-in.ejs");
+    res.render("auth/sign-in.ejs", {
+        user: req.session.user,
+    });
 }
 
 const signIn = async (req, res) => {
@@ -42,7 +48,17 @@ const signIn = async (req, res) => {
 
     if(!validPassword) return res.send("Login failed");
 
-    res.send("Sign in route")
+    req.session.user = {
+        username: userInDatabase.username,
+        id: userInDatabase.id,
+    }
+
+    res.redirect("/");
+}
+
+const signOut = async (req, res) => {
+    req.session.destroy();
+    res.redirect("/");
 }
 
 module.exports = {
@@ -51,4 +67,5 @@ module.exports = {
     signUp,
     showSignInForm,
     signIn,
+    signOut,
 }

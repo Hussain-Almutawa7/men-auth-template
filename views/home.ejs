@@ -1,8 +1,13 @@
 ﻿<%- include("./partials/nav.ejs") %>
 
 <main>
-    <h1>Example App</h1>
-    <p>Your Express, MongoDB, Mongoose, and EJS project is ready.</p>
+    <% if(user) { %>
+        <h1>Welcome to the App <%= user.username %></h1>
+        <p>Your Express, MongoDB, Mongoose, and EJS project is ready.</p>
+   <% } else { %>
+    <h1>Welcome to the App</h1>
+    <p>Sign in for Your Express, MongoDB, Mongoose, and EJS project to work.</p>
+  <% } %>
 </main>
 </body>
 </html>

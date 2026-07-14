@@ -35,3 +35,16 @@ form {
     flex-direction: column;
     gap: 10px;
 }
+
+button {
+    background-color: beige;
+    border: none;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+button:hover {
+    text-decoration: none;
+}
